@@ -62,7 +62,13 @@ namespace TaskManagement.Controllers
 
         private string GenerateJwtToken(User user)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            // Obtener la clave secreta desde la configuración
+            var key = _configuration["Jwt:Key"];
+            if (string.IsNullOrEmpty(key) || Encoding.UTF8.GetBytes(key).Length < 32)
+            {
+                throw new InvalidOperationException("JWT Key must be at least 32 characters long.");
+            }
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
