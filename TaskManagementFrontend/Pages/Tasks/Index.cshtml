@@ -1,0 +1,231 @@
+@page
+@model TasksModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2>Dashboard Task Management</h2>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+    Creata new Task
+</button>
+
+
+
+<!-- Filter Dropdown -->
+<form method="get" class="mb-3">
+    <select name="filterStatus" class="form-control" onchange="this.form.submit()">
+        <option value="" selected="@(Model.FilterStatus == null)">All</option>
+        <option value="Pending" selected="@(Model.FilterStatus == "Pending")">Pending</option>
+        <option value="InProgress" selected="@(Model.FilterStatus == "InProgress")">In Progress</option>
+        <option value="Completed" selected="@(Model.FilterStatus == "Completed")">Completed</option>
+    </select>
+</form>
+
+<!-- Task List -->
+@if (Model.Tasks != null && Model.Tasks.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model.Tasks)
+            {
+                <tr>
+                    <td>@task.Title</td>
+                    <td>@task.Description</td>
+                    <td>@task.Status</td>
+                    <td>
+                        <!-- Edit Button -->
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" 
+                                data-id="@task.Id" data-title="@task.Title" data-description="@task.Description" 
+                                data-status="@task.Status">
+                            Edit
+                        </button>
+
+                        <!-- Delete Button -->
+                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" 
+                                data-id="@task.Id">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No tasks available.</p>
+}
+<!-- Modal de Crear Tarea -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Crear Nueva Tarea</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario -->
+                <form method="post" asp-page-handler="Create">
+                    <!-- Campo de Título -->
+                    <div class="mb-3">
+                        <label for="newTaskTitle" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="newTaskTitle" name="NewTask.Title" required />
+                    </div>
+
+                    <!-- Campo de Descripción -->
+                    <div class="mb-3">
+                        <label for="newTaskDescription" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="newTaskDescription" name="NewTask.Description" rows="3" required></textarea>
+                    </div>
+
+                    <!-- Campo de Estado -->
+                    <div class="mb-3">
+                        <label for="newTaskStatus" class="form-label">Estado</label>
+                        <select class="form-select" id="newTaskStatus" name="NewTask.Status" required>
+                            <option value="Pending">Pendiente</option>
+                            <option value="InProgress">En Progreso</option>
+                            <option value="Completed">Completada</option>
+                        </select>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Crear Tarea</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal de Editar Tarea -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Editar Tarea</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Update">
+                    <!-- Campo de ID de la tarea (Oculto) -->
+                    <input type="hidden" id="taskId" name="EditTask.Id" />
+
+                    <!-- Campo de Título -->
+                    <div class="mb-3">
+                        <label for="taskTitle" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="taskTitle" name="EditTask.Title" required />
+                    </div>
+
+                    <!-- Campo de Descripción -->
+                    <div class="mb-3">
+                        <label for="taskDescription" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="taskDescription" name="EditTask.Description" rows="3" required></textarea>
+                    </div>
+
+                    <!-- Campo de Estado -->
+                    <div class="mb-3">
+                        <label for="taskStatus" class="form-label">Estado</label>
+                        <select class="form-select" id="taskStatus" name="EditTask.Status" required>
+                            <option value="Pending">Pendiente</option>
+                            <option value="InProgress">En Progreso</option>
+                            <option value="Completed">Completada</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo de Usuario Asignado -->
+                    @* <div class="mb-3">
+                        <label for="assignedUser" class="form-label">Usuario Asignado</label>
+                        <input type="text" class="form-control" id="assignedUser" name="EditTask.AssignedUserId" required />
+                    </div> *@
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Actualizar Tarea</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal de Eliminar Tarea -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Eliminar Tarea</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar esta tarea?</p>
+            </div>
+            <div class="modal-footer">
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" id="deleteTaskId" name="taskId" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    
+
+    <script>
+         // Abrir el modal de Crear Tarea y limpiar los campos
+    var createModal = document.getElementById('createModal');
+    createModal.addEventListener('show.bs.modal', function (event) {
+        // Limpiar los campos del modal de creación
+        document.getElementById('newTaskTitle').value = '';
+        document.getElementById('newTaskDescription').value = '';
+        document.getElementById('newTaskStatus').selectedIndex = 0; // Seleccionar la primera opción
+        document.getElementById('assignedUser').selectedIndex = 0; // Seleccionar la primera opción
+    });
+
+    // Rellenar el modal de editar con los datos de la tarea seleccionada
+    var editModal = document.getElementById('editModal');
+    editModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Botón que disparó el modal
+        var taskId = button.getAttribute('data-id');
+        var taskTitle = button.getAttribute('data-title');
+        var taskDescription = button.getAttribute('data-description');
+        var taskStatus = button.getAttribute('data-status');
+
+        // Asignar los valores a los campos del modal
+        document.getElementById('taskId').value = taskId;
+        document.getElementById('taskTitle').value = taskTitle;
+        document.getElementById('taskDescription').value = taskDescription;
+        document.getElementById('taskStatus').value = taskStatus;
+    });
+
+    // Rellenar el modal de eliminar con el ID de la tarea a eliminar
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Botón que disparó el modal
+        var taskId = button.getAttribute('data-id');
+
+        // Asignar el ID de la tarea al campo oculto
+        document.getElementById('deleteTaskId').value = taskId;
+    });
+</script>
+
+
+}
