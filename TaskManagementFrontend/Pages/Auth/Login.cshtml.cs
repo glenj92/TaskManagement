@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TaskManagementFrontend.Services; 
 
 public class LoginModel : PageModel
 {
@@ -24,7 +25,7 @@ public class LoginModel : PageModel
         {
             // Llama a la API de login
             var token = await _apiService.Login(Email, Password);
-
+            Console.WriteLine("Email");
             // Guarda el token en la sesión o cookie
             HttpContext.Session.SetString("AuthToken", token);
 

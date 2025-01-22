@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaskManagementFrontend.Services; 
+using TaskManagementFrontend.Models; 
+
 
 public class TasksModel : PageModel
 {
@@ -19,6 +22,9 @@ public class TasksModel : PageModel
 
     [BindProperty]
     public string FilterStatus { get; set; }
+
+    [TempData]
+    public string AlertMessage { get; set; }
 
     public string Token { get; set; }
     public string Message { get; set; }
@@ -43,34 +49,16 @@ public class TasksModel : PageModel
         }
     }
 
-    //   public async Task<IActionResult> OnGet()
-    // {
-    //     var token = HttpContext.Session.GetString("AuthToken");
-    //     if (string.IsNullOrEmpty(token))
-    //     {
-    //         return RedirectToPage("/Auth/Login");
-    //     }
-
-    //     Tasks = await _apiService.GetTasks(token);
-    //     return Page();
-    // }
-
     public async Task<IActionResult> OnPostCreateAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
-
         try
         {
             Token = HttpContext.Session.GetString("AuthToken");
-            var isTasked =  await _apiService.CreateTask(NewTask.Title, NewTask.Description, NewTask.Status, Token);
-
+            var isTasked =  await _apiService.CreateTask(NewTask.Id, NewTask.Title, NewTask.Description, NewTask.Status, NewTask.AssignedUserId, Token);
             if (isTasked)
             {
-                Message = "Registration successful! You can now log in.";
-                return RedirectToPage("/Tasks");
+                Message = "Registration successful!";
+                return RedirectToPage();
             }
         }
         catch (System.Exception ex)
@@ -78,41 +66,38 @@ public class TasksModel : PageModel
             Message = $"Error: {ex.Message}";
         }
 
-        // return RedirectToPage();
-        return Page();
-
+         return RedirectToPage();
+       // return Page();
 
         
     }
 
-     // Actualizar tarea
-        public async Task<IActionResult> OnPostUpdateAsync()
+
+     public async Task<IActionResult> OnPostUpdateAsync()
+    {
+
+        Token = HttpContext.Session.GetString("AuthToken");
+
+        if (!string.IsNullOrEmpty(Token))
         {
-            if (!ModelState.IsValid)
+            var success = await _apiService.UpdateTask(EditTask.Id, EditTask.Title, EditTask.Description, EditTask.Status, EditTask.AssignedUserId, Token);
+
+            if (success)
             {
+                Message = "Updated successfuly!";
+                return RedirectToPage();
+            }
+            else
+            {   
+                ModelState.AddModelError(string.Empty, "Error updating the task.");
                 return Page();
             }
-
-            Token = HttpContext.Session.GetString("AuthToken");
-
-            if (!string.IsNullOrEmpty(Token))
-            {
-                // Usar ApiService para actualizar la tarea
-                var success = await _apiService.UpdateTask(EditTask, Token);
-
-                if (success)
-                {
-                    return RedirectToPage(); // Redirige para actualizar la lista
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Error al actualizar la tarea.");
-                    return Page();
-                }
-            }
-
-            return Unauthorized();
         }
+
+        return Unauthorized();
+    }
+
+
     public async Task<IActionResult> OnPostDeleteAsync(int id)
     {
         Token = HttpContext.Session.GetString("AuthToken");
@@ -121,14 +106,4 @@ public class TasksModel : PageModel
         return RedirectToPage();
     }
 }
-
-
-public class TaskDto
-{
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public string Status { get; set; }
-}
-
 

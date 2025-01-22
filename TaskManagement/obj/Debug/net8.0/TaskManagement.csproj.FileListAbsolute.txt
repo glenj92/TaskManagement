@@ -685,3 +685,7 @@
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement/obj/Debug/net8.0/TaskManagement.pdb
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement/obj/Debug/net8.0/TaskManagement.genruntimeconfig.cache
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement/obj/Debug/net8.0/ref/TaskManagement.dll
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement/bin/Debug/net8.0/TaskManagement.xml
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement/obj/Debug/net8.0/TaskManagement.xml
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/bin/Debug/net8.0/TaskManagement.xml
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/obj/Debug/net8.0/TaskManagement.xml

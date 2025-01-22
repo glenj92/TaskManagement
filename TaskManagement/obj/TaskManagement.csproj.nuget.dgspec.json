@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement/TaskManagement.csproj": {}
+    "/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement.csproj": {}
   },
   "projects": {
-    "/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement/TaskManagement.csproj": {
+    "/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement/TaskManagement.csproj",
+        "projectUniqueName": "/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement.csproj",
         "projectName": "TaskManagement",
-        "projectPath": "/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement/TaskManagement.csproj",
+        "projectPath": "/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement.csproj",
         "packagesPath": "/Users/joshglenbritoavila/.nuget/packages/",
-        "outputPath": "/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/TaskManagement/obj/",
+        "outputPath": "/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagement/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/joshglenbritoavila/.nuget/NuGet/NuGet.Config"
@@ -93,7 +93,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[7.2.0, )"
             },
             "xunit": {
               "target": "Package",

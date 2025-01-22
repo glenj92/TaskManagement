@@ -1,10 +1,3 @@
-/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.GeneratedMSBuildEditorConfig.editorconfig
-/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.AssemblyInfoInputs.cache
-/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.AssemblyInfo.cs
-/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.csproj.CoreCompileInputs.cache
-/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.MvcApplicationPartsAssemblyInfo.cache
-/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.RazorAssemblyInfo.cache
-/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.RazorAssemblyInfo.cs
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/bin/Debug/net8.0/appsettings.Development.json
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/bin/Debug/net8.0/appsettings.json
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/bin/Debug/net8.0/TaskManagementFrontend.staticwebassets.runtime.json
@@ -13,6 +6,14 @@
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/bin/Debug/net8.0/TaskManagementFrontend.runtimeconfig.json
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/bin/Debug/net8.0/TaskManagementFrontend.dll
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/bin/Debug/net8.0/TaskManagementFrontend.pdb
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.GeneratedMSBuildEditorConfig.editorconfig
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.AssemblyInfoInputs.cache
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.AssemblyInfo.cs
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.csproj.CoreCompileInputs.cache
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.MvcApplicationPartsAssemblyInfo.cache
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.RazorAssemblyInfo.cache
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.RazorAssemblyInfo.cs
+/Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/TaskManagementFrontend.sourcelink.json
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/staticwebassets.build.json
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/staticwebassets.development.json
 /Users/joshglenbritoavila/Projects/TaskManagement/TaskManagementFrontend/obj/Debug/net8.0/staticwebassets/msbuild.TaskManagementFrontend.Microsoft.AspNetCore.StaticWebAssets.props

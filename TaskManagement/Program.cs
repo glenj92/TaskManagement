@@ -9,6 +9,9 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System;
+using System.IO;
+using System.Reflection;
 using TaskManagement.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +19,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    // Configuración para incluir comentarios XML en la documentación de Swagger
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);  // Incluir comentarios XML generados por el compilador
+
+    // Puedes personalizar más la información de Swagger, como título, descripción, versión, etc.
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "TaskManagement",
+        Version = "v1",
+        Description = "Una API para gestión Tareas."
+    });
+});
 
 // Configuración de JWT
 // Add services to the container.
