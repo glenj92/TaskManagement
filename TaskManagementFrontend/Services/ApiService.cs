@@ -13,7 +13,7 @@ namespace TaskManagementFrontend.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
-       
+
 
         public ApiService(HttpClient httpClient, IConfiguration configuration)
         {
@@ -69,16 +69,10 @@ namespace TaskManagementFrontend.Services
             throw new Exception("Failed to fetch tasks");
         }
 
-        public async Task<bool> CreateTask(int id, string title, string description, string status, int? assigneduserid, string token)
+        public async Task<bool> CreateTask(TaskDto taskDto, string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _httpClient.PostAsJsonAsync($"{_configuration["ApiBaseUrl"]}/tasks", new
-            {
-                Title = title,
-                Description = description,
-                Status = status,
-                AssignedUserId = assigneduserid
-            });
+            var response = await _httpClient.PostAsJsonAsync($"{_configuration["ApiBaseUrl"]}/tasks", taskDto);
 
             if (response.IsSuccessStatusCode)
             {
@@ -88,16 +82,10 @@ namespace TaskManagementFrontend.Services
             throw new Exception("Failed to create task");
         }
 
-        public async Task<bool> UpdateTask(int id, string title, string description, string status, int? assigneduserid, string token)
+        public async Task<bool> UpdateTask(TaskDto taskDto, string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _httpClient.PutAsJsonAsync($"{_configuration["ApiBaseUrl"]}/tasks/{id}", new
-            {
-                Title = title,
-                Description = description,
-                Status = status,
-                AssignedUserId = assigneduserid
-            });
+            var response = await _httpClient.PutAsJsonAsync($"{_configuration["ApiBaseUrl"]}/tasks/{taskDto.Id}", taskDto);
 
             if (response.IsSuccessStatusCode)
             {
@@ -125,6 +113,6 @@ namespace TaskManagementFrontend.Services
 
     }
 
-  
+
 
 }

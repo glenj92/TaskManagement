@@ -54,7 +54,7 @@ public class TasksModel : PageModel
         try
         {
             Token = HttpContext.Session.GetString("AuthToken");
-            var isTasked =  await _apiService.CreateTask(NewTask.Id, NewTask.Title, NewTask.Description, NewTask.Status, NewTask.AssignedUserId, Token);
+            var isTasked =  await _apiService.CreateTask(NewTask, Token);
             if (isTasked)
             {
                 Message = "Registration successful!";
@@ -67,7 +67,6 @@ public class TasksModel : PageModel
         }
 
          return RedirectToPage();
-       // return Page();
 
         
     }
@@ -80,7 +79,8 @@ public class TasksModel : PageModel
 
         if (!string.IsNullOrEmpty(Token))
         {
-            var success = await _apiService.UpdateTask(EditTask.Id, EditTask.Title, EditTask.Description, EditTask.Status, EditTask.AssignedUserId, Token);
+            // var success = await _apiService.UpdateTask(EditTask.Id, EditTask.Title, EditTask.Description, EditTask.Status, EditTask.AssignedUserId, Token);
+            var success = await _apiService.UpdateTask(EditTask, Token);
 
             if (success)
             {
